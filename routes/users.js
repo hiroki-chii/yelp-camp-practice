@@ -35,9 +35,19 @@ router.post(
     failureRedirect: "/login",
   }),
   (req, res) => {
-    req.flash("success", "おかえりなさい!!!!");
+    req.flash("success", "おかえりなさい!");
     res.redirect("/campgrounds");
   }
 );
+
+router.get("/logout", (req, res) => {
+  req.logOut((e) => {
+    if (e) {
+      return next(e);
+    }
+    req.flash("success", "ログアウトしました。");
+    res.redirect("/campgrounds");
+  });
+});
 
 module.exports = router;
