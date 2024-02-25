@@ -1,2 +1,3 @@
 # node_modulesを除外する
-node_modules/
+node_modules
+.env
