@@ -4,10 +4,12 @@
     "dbpath",
     "hogehoge",
     "makecampground",
+    "mapbox",
     "mogemoge",
     "mysecret",
     "resave",
     "webdevbc",
     "yelpcamp"
-  ]
+  ],
+  "html.validate.scripts": true
 }
