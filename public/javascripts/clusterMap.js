@@ -1,13 +1,15 @@
 mapboxgl.accessToken = mapToken;
 const map = new mapboxgl.Map({
-  container: "map",
+  container: "cluster-map",
   // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
   style: "mapbox://styles/mapbox/light-v11",
   center: [138, 39],
-  zoom: 3,
+  zoom: 4,
 });
 
-console.log(campgrounds);
+map.addControl(new mapboxgl.NavigationControl());
+
+// console.table(campgrounds);
 
 map.on("load", () => {
   // Add a new source from our GeoJSON data and
@@ -37,9 +39,9 @@ map.on("load", () => {
       "circle-color": [
         "step",
         ["get", "point_count"],
-        "indigo",
+        "green",
         20,
-        "blue",
+        "aquamarine",
         40,
         "cyan",
       ],
