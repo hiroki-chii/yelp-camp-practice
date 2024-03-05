@@ -10,7 +10,6 @@ const session = require("express-session");
 const flash = require("connect-flash");
 const ExpressError = require("./utils/ExpressError");
 const methodOverride = require("method-override");
-const port = 3000;
 const passport = require("passport");
 const localStrategy = require("passport-local");
 const User = require("./models/user");
@@ -25,7 +24,7 @@ const reviewRoutes = require("./routes/reviews");
 const MongoStore = require("connect-mongo");
 const { log } = require("console");
 
-const dbUrl = "mongodb://localhost:27017/yelp-camp";
+const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/yelp-camp";
 
 mongoose
   .connect(dbUrl, {
@@ -53,9 +52,11 @@ app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(mongoSanitize({ replaceWith: "_" }));
 
+const secret = process.env.SECRET || "mysecret";
+
 const store = MongoStore.create({
   mongoUrl: dbUrl,
-  crypto: { secret: "mysecret" },
+  crypto: { secret },
   touchAfter: 24 * 3600, // time period in seconds
 });
 
@@ -66,7 +67,7 @@ store.on("error", (e) => {
 const sessionConfig = {
   store,
   name: "session",
-  secret: "mysecret",
+  secret,
   resave: false,
   saveUninitialized: true,
   cookie: {
@@ -153,6 +154,7 @@ app.use((err, req, res, next) => {
   res.status(statusCode).render("error", { err });
 });
 
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`ポート${port}で待ち受け中`);
 });

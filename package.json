@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "\\c\\Program Files\\MongoDB\\Server\\4.4\\bin\\mongod.exe\" --dbpath ~/webdevbc/data/db"
+    "start": "node app.js"
   },
   "keywords": [],
   "author": "",
