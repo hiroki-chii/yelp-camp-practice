@@ -15,7 +15,7 @@ const localStrategy = require("passport-local");
 const User = require("./models/user");
 const helmet = require("helmet");
 
-// const mongoSanitize = require("express-mongo-sanitize");
+const mongoSanitize = require("express-mongo-sanitize");
 
 const userRoutes = require("./routes/users");
 const campgroundRoutes = require("./routes/campgrounds");
@@ -50,7 +50,7 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "public")));
-// app.use(mongoSanitize({ replaceWith: "_" }));
+app.use(mongoSanitize({ replaceWith: "_" }));
 
 const secret = process.env.SECRET || "mysecret";
 
